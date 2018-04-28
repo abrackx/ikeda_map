@@ -1,6 +1,7 @@
 from matplotlib import pyplot as plt
 import math
-from random import random, randint
+from random import random
+import random
 import numpy as np
 import pylab
 
@@ -15,12 +16,10 @@ def ikeda_map(u, x, y):
     return [xn, yn]
 
 def rand_list(p):
-    #returns p random points in disk of radius r centered at c
-    #found at: https://stackoverflow.com/a/44356472
     l = []
     for i in range(p):
-        x = randint(1, 100)
-        y = randint(1, 100)
+        x = random.uniform(-1, 1)
+        y = random.uniform(-1, 1)
         l.append([x, y])
 
     return l
@@ -28,10 +27,8 @@ def rand_list(p):
 
 
 def ikeda_plot(points, num_iter, u):
-    #generate p amount of points (x,y), apply the function for n iterations
+    #generate p amount of points [x,y], apply the function for n iterations
     #with u as the parameter value for the ikeda map
-
-
     x = []
     y = []
     xinit = []
@@ -64,8 +61,18 @@ def ikeda_plot(points, num_iter, u):
     plt.title('values after ' + str(num_iter) + ' iterations')
     plt.show()
 
+running = True
+while running:
+    p = input('Enter the number of points: ')
+    n = input('Enter the number of iterations: ')
+    u = input('Enter your choice of u value (between 0 and 1 in decimal form): ')
+    ikeda_plot(int(p), int(n), float(u))
 
-ikeda_plot(600, 20, .4578)
+    v = input('Press enter to start again. Press x to exit. ')
+
+    if v == 'x':
+        running = False
+
 
 
 
